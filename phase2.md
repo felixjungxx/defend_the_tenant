@@ -3,8 +3,6 @@
 **Customer:** small business, 100 users, two administrators, Microsoft 365 E7.
 **Ask:** recommend and rank the five security controls that matter most, and show how to roll them out with very little admin time.
 
-> This plan describes a fictional customer. It contains no tenant data, identifiers or credentials.
-
 ---
 
 ## How I prioritized
