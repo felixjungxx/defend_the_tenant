@@ -171,13 +171,5 @@ For each control I'd record the owner, the configuration, what we observed, any 
 | Consent phishing | User hands mail access to an app | Blocked and reviewed by an admin |
 | Lockout from a bad policy | Possible | Break-glass accounts, report-only, one change at a time |
 
----
 
-## Phase 1 evidence
 
-All ten lab controls were applied and confirmed by the assessment script: 10 implemented, 0 not configured, 0 unknown. The results file in this repository has identifiers removed.
-
-## References
-
-- Microsoft Learn: *Harden a Microsoft 365 tenant with Microsoft Secure Score* (AI Skills Navigator playlist)
-- Plan a Conditional Access deployment · Manage emergency access accounts · Authentication strengths · Block legacy authentication · Report-only mode · Microsoft Entra role best practices · PIM for Microsoft Entra roles · Preset security policies in EOP and Defender for Office 365 · Set up SPF, DKIM and DMARC · Intune compliance policies · Onboard devices to Defender for Endpoint · Attack surface reduction rules · Self-service password reset · Teams meeting policies
