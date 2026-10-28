@@ -24,7 +24,7 @@ The ranking reflects risk reduction. The rollout order further down follows depe
 
 Conditional Access can lock out every admin if it's configured badly, so these come first:
 
-- **Two cloud-only break-glass accounts** with permanent Global Administrator. Microsoft now enforces MFA for admin portals on every account, so each gets its own FIDO2 key that doesn't depend on the normal admin sign-in. No mailbox, no license, credentials stored under a documented emergency procedure. Every sign-in raises an alert, and the accounts are tested on a fixed schedule. They are the only accounts excluded from the baseline policies.
+- **Two cloud-only break-glass accounts** with permanent Global Administrator. Microsoft now enforces MFA for admin portals on every account, so each gets its own FIDO2 key that doesn't depend on the normal admin sign-in. No mailbox, no license, credentials stored under a documented emergency procedure. Every sign-in attempt raises an alert, and the accounts are tested on a fixed schedule. They are the only accounts excluded from the baseline policies.
 - **A small pilot group:** a normal user, an admin, someone working mostly on mobile, and users of unusual clients such as scanners or meeting room devices.
 - **An export of the current state:** Conditional Access policies, MFA registration, legacy sign-ins, risky users, app consent grants, role assignments, mail protection policies and device status. This is the rollback reference.
 - **Security defaults** turned off through a planned change, once the custom policies cover the same protection.
