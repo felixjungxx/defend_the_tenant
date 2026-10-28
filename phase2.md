@@ -1,7 +1,7 @@
 # Microsoft 365 Hardening Plan – Defend the Tenant Challenge
 
 **Customer:** small business, 100 users, two administrators, Microsoft 365 E7.
-**Ask:** recommend and rank the five security controls that matter most, and show how to roll them out with very little admin time.
+**Phase 2** recommend and rank the five security controls that matter most, and show how to roll them out with very little admin time.
 
 > This plan describes a fictional customer. It contains no tenant data, identifiers or credentials.
 
@@ -17,8 +17,6 @@ Three things about this customer shaped the ranking:
 - **E7 licensing.** E7 includes the E5 security stack (Defender for Office 365, Defender for Endpoint, Intune, Purview) plus Entra Suite, Copilot and Agent 365. Licensing doesn't block anything below. The challenge is time, not tooling.
 
 The identity controls come from the Secure Score hardening baseline in the Microsoft Learn module. I added email and devices because those are the two main ways attacks reach a small company that the identity baseline doesn't cover.
-
-The ranking reflects risk reduction. The rollout order further down follows dependencies and lockout risk.
 
 ## Before changing anything
 
@@ -47,7 +45,7 @@ Conditional Access can lock out every admin if it's configured badly, so these c
 Stolen and reused passwords, password spray and phishing are still the usual way into small tenants. MFA makes a stolen password far less useful. Admins get the stronger method because push notifications and one-time codes can be relayed by phishing kits, and an admin account opens everything. Legacy protocols can't do MFA, so they would be a way around everything else. The risk policies turn Identity Protection detections (leaked credentials, anonymous IPs, unusual sign-ins) into an automatic MFA prompt or a forced remediation, which matters when nobody watches a console.
 
 **Rolling it out with two admins**
-Start with the registration report. In the Phase 1 lab, 9 of 10 users weren't ready yet, which is normal. Run a registration campaign for Microsoft Authenticator and use a Temporary Access Pass for people without a phone. For legacy authentication, filter the sign-in logs by client app over a full month so monthly jobs show up too. In small companies this usually turns up a scanner sending mail, an old mail client or a script. Fix those, then enforce in this order: admins, legacy block, all users once nearly everyone is registered, risk policies last. If users are synced from on-premises, password writeback has to work before the user risk policy is enforced.
+Start with the registration report. In the Phase 1 lab, 9 of 10 users weren't ready yet, which is normal. Run a registration campaign for Microsoft Authenticator and use a Temporary Access Pass for people without a phone. For legacy authentication, filter the sign-in logs by client app across the last 30 days, which Entra keeps by default, so monthly jobs show up too. In small companies this usually turns up a scanner sending mail, an old mail client or a script. Fix those, then enforce in this order: admins, legacy block, all users once nearly everyone is registered, risk policies last. If users are synced from on-premises, password writeback has to work before the user risk policy is enforced.
 
 **Tradeoffs**
 Users notice the extra step and there will be questions in the first week. Old devices and apps stop working until they're replaced or reconfigured. Risk detections produce some false positives, for example while travelling. And remediation lowers the risk state but doesn't undo what an attacker already did, so a confirmed compromise still needs a proper look.
@@ -126,12 +124,13 @@ Users wait for an admin before they can use a new app, and the two admins need t
 
 ---
 
-## Quick wins right after the top five
+## After the top five
 
-These are low effort but reduce less risk than the five above:
+These come next. They either reduce less risk than the five above or build on them:
 
 - **Self-service password reset for all users,** with two methods. Fewer password tickets for two admins and less risk from "I lost my phone, please reset me" calls. Most users will already have registered during the MFA rollout. Test with a normal user, because admins have their own, stricter reset policy.
 - **Teams meeting defaults** in the Global meeting policy: only invited people bypass the lobby, only organizers and co-organizers present, anonymous users can't join. Changes can take up to a day. The tradeoff is that external contacts without a Microsoft account can no longer join anonymously.
+- **Copilot readiness.** E7 includes Microsoft 365 Copilot, which can surface anything a user already has access to. Before rolling it out, check SharePoint and OneDrive for overshared sites and "anyone" links, and label confidential content with sensitivity labels.
 
 ---
 
@@ -143,7 +142,10 @@ These are low effort but reduce less risk than the five above:
 | 1 | Conditional Access policies in report-only, role inventory | Defender for Office 365 presets, SPF/DKIM, DMARC in monitoring mode |
 | 2 | Enforce admin MFA and the legacy block, set up PIM | Turn off user consent, review existing grants, SSPR pilot |
 | 3 | Enforce MFA for all users once registration is close to complete | Intune and Defender for Endpoint on admin and pilot devices, ASR in audit |
-| 4 | Enforce risk policies, Teams meeting defaults | Remaining devices in groups, compliant device for admins, validation evidence |
+| 4 | Enforce risk policies, Teams meeting defaults | Compliant device for admins, validation evidence |
+| 5–8 | Review risk detections and exceptions, quarterly review schedule | Remaining devices in groups of 20–30, ASR rules from audit to block |
+
+This assumes roughly one day per week per admin next to normal operations. The identity work is finished after four weeks; the device rollout runs until about week eight.
 
 One change per maintenance window. If a policy causes problems, it gets switched off and investigated, not deleted or edited in a hurry.
 
@@ -171,8 +173,5 @@ For each control I'd record the owner, the configuration, what we observed, any 
 | Ransomware on a laptop | Depends on the user | Detected and contained, device must be healthy for access |
 | Consent phishing | User hands mail access to an app | Blocked and reviewed by an admin |
 | Lockout from a bad policy | Possible | Break-glass accounts, report-only, one change at a time |
-
----
-
 
 
