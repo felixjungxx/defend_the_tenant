@@ -3,9 +3,13 @@
 **Customer:** small business, 100 users, two administrators, Microsoft 365 E7.
 **Ask:** recommend and rank the five security controls that matter most, and show how to roll them out with very little admin time.
 
+> This plan describes a fictional customer. It contains no tenant data, identifiers or credentials.
+
 ---
 
 ## How I prioritized
+
+I didn't rank by Secure Score points. Points show how much of a baseline is in place, not how likely a breach is. For each candidate I asked: How often do attackers actually use this path? What do they get if it's open? How many people does it affect? Can two admins realistically run it? And what breaks if we get it wrong?
 
 Three things about this customer shaped the ranking:
 
@@ -29,7 +33,7 @@ Conditional Access can lock out every admin if it's configured badly, so these c
 
 ---
 
-## Five Controls
+## The top five
 
 ### 1. Strong sign-in for every account
 
@@ -168,6 +172,8 @@ For each control I'd record the owner, the configuration, what we observed, any 
 | Ransomware on a laptop | Depends on the user | Detected and contained, device must be healthy for access |
 | Consent phishing | User hands mail access to an app | Blocked and reviewed by an admin |
 | Lockout from a bad policy | Possible | Break-glass accounts, report-only, one change at a time |
+
+---
 
 
 
