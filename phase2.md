@@ -8,8 +8,7 @@
 ---
 
 ## How I prioritized
-
-I didn't rank by Secure Score points. Points show how much of a baseline is in place, not how likely a breach is. For each candidate I asked: How often do attackers actually use this path? What do they get if it's open? How many people does it affect? Can two admins realistically run it? And what breaks if we get it wrong?
+For each candidate I asked: How often do attackers actually use this path? What do they get if it's open? How many people does it affect? Can two admins realistically run it? And what breaks if we get it wrong?
 
 Three things about this customer shaped the ranking:
 
